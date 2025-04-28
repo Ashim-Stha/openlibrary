@@ -24,5 +24,5 @@ test("login with invalid credentials", async ({ page }) => {
       const input = element as HTMLInputElement;
       return input.validationMessage;
     });
-  expect(validationMessage).toContain(loginPage.errorMessage);
+  await expect(validationMessage).toContain(loginPage.errorMessage);
 });
