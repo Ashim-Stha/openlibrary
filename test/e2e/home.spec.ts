@@ -6,10 +6,10 @@ test.beforeEach(async ({ page }) => {
   await homePage.navigateToHome();
 });
 
-test('is homepage',async ({page})=>{
-    const homePage=new HomePage({page})
-    await expect(homePage.welcomeLocator).toBeVisible()
-})
+test("is homepage", async ({ page }) => {
+  const homePage = new HomePage({ page });
+  await expect(homePage.welcomeLocator).toBeVisible();
+});
 
 test("go to login", async ({ page }) => {
   const homePage = new HomePage({ page });
