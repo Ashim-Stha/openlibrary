@@ -3,10 +3,6 @@ import { LoginPage } from "../pages/LoginPage";
 import { home_url, validEmail, validPassword } from "../helper-config";
 import { AddBookPage } from "../pages/AddBookPage";
 
-const title: string = "One Piece";
-const publisher: string = "Luffy and Zoro";
-const published: string = "1999";
-
 test.beforeEach(async ({ page }: { page: Page }) => {
   await page.goto(home_url);
   const loginPage = new LoginPage({ page });
@@ -15,6 +11,10 @@ test.beforeEach(async ({ page }: { page: Page }) => {
 });
 
 test("add book", async ({ page }: { page: Page }) => {
+  const title: string = "One Piece";
+  const publisher: string = "Luffy and Zoro";
+  const published: string = "1999";
+  
   const addBookPage = new AddBookPage({ page });
   await addBookPage.navigateToAddBook();
   await addBookPage.addBook(title, publisher, published);
