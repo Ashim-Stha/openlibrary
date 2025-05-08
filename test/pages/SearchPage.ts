@@ -22,8 +22,12 @@ export class SearchPage {
     await this.searchButton.click();
   }
 
-  getResults(): Locator {
-    return this.resultLocator;
+  async getResults(): Promise<Locator[]> {
+    const results: Locator[] = [];
+    for (const result of await this.resultLocator.all()) {
+      results.push(result);
+    }
+    return results;
   }
 
   getSearchNotMatchText(): Locator {
