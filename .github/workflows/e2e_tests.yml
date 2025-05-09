@@ -1,0 +1,46 @@
+name: Setup project and run e2e tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  run-e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo code
+        uses: actions/checkout@v3
+
+      - name: Setup Docker Compose
+        uses: docker/setup-compose-action@v1
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: v18.19.1
+
+      - name: Start the server
+        run: docker compose up -d
+
+      - name: Wait for openlibrary server
+        run: |
+          sudo apt-get install wait-for-it -y
+          wait-for-it -h localhost -p 8080 -t 10
+
+      - name: Run e2e tests
+        working-directory: ./test
+        run: |
+         npm install
+         npx playwright install chromium
+         npx playwright test e2e
+      -  uses: actions/upload-artifact@v4
+         if: ${{ !cancelled() }}
+         with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
