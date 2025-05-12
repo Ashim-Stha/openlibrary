@@ -4,13 +4,21 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "lint": "npx eslint",
+    "lint:fix": "npx eslint --fix"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.27.0",
     "@playwright/test": "^1.52.0",
+    "@stylistic/eslint-plugin-js": "^4.2.0",
     "@types/node": "^22.15.3",
+    "eslint": "^9.27.0",
+    "globals": "^16.1.0",
+    "typescript-eslint": "^8.32.1",
     "dotenv": "^16.5.0"
   }
 }
