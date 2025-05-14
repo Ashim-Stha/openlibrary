@@ -1,8 +1,10 @@
 export const BASE_URL: string =
-  process.env.BASE_URL ?? "http://localhost:8080/";
+  process.env.BASE_URL ?? "http://localhost:8080";
 export const VALID_EMAIL: string = process.env.EMAIL ?? "hello@gmail.com";
 export const VALID_PASSWORD: string = process.env.PASSWORD ?? "password";
 export const INVALID_EMAIL: string = process.env.INVALID_EMAIL ?? "invalid";
 export const LOGIN_URL: string =
   process.env.LOGIN_URL ?? "http://localhost:8080/account/login";
 export const SIGNUP_URL: string = process.env.SIGNUP_URL ?? " ";
+export const ADVANCED_SEARCH_URL: string = process.env.ADVANCED_SEARCH_URL ?? "http://localhost:8080/advancedsearch";
+export const SEARCH_RESULTS_URL: string = process.env.SEARCH_RESULTS_URL ?? `${BASE_URL}/search?title=Robinson&author=Daniel+Defoe`;
