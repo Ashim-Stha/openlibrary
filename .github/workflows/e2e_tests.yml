@@ -37,17 +37,25 @@ jobs:
 
       - name: Run e2e tests
         working-directory: ./test
-        id: test
+        id: e2e-tests
         run: |
-          npm install
+          npm ci
           npx playwright install chromium
-          npx playwright test e2e
+          npx playwright test e2e --retries=0
 
-      - name: Log tracing results
+      - name: Upload tracing results
+        if: ${{ failure() && steps.e2e-tests.conclusion == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ./test/test-results/*/*.zip
+
+      - name : Log tracing results
+        if: ${{ failure() && steps.e2e-tests.conclusion == 'failure' }}
         working-directory: ./test
-        if: ${{ failure() && steps.test.conclusion == 'failure' }}
         run: |
-          echo "To view a trace, run the following command(s) locally:"
           for f in test-results/*/*.zip; do
-              echo "npx playwright show-trace $f"
+              echo "npx playwright show-trace *****/*****/$(dirname "$f")/trace.zip"
           done
+          
+        
