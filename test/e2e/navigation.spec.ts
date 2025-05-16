@@ -1,6 +1,8 @@
 import { test, expect, Page } from "@playwright/test"
 import { NavigationPage } from "../pages/NavigationPage";
-import { BASE_URL, MY_BOOKS_BEFORE_LOGIN_URL, MY_BOOKS_URL, VALID_EMAIL, VALID_PASSWORD } from "../helper-config";
+import { BASE_URL, VALID_EMAIL, VALID_PASSWORD } from "../helper-config";
+import { LoginPage } from "../pages/LoginPage";
+import { BookPage } from "../pages/BookPage";
 
 let navigationPage: NavigationPage;
 
@@ -9,19 +11,23 @@ test.beforeEach(async({page}: {page: Page}) => {
     await page.goto(BASE_URL);
 });
 
-test("navigating my books link before login", async({page}: {page: Page}) => {
-    await navigationPage.navigateToMyBooks();    
-    await expect(page).toHaveURL(MY_BOOKS_BEFORE_LOGIN_URL);
-    await expect(navigationPage.textToLogin).toBeVisible();
+test("redirecting to my books page after login", async({page}: {page: Page}) => {
+  const loginPage = await navigationPage.navigateToMyBooks() as LoginPage;
+  let booksPage: BookPage;
+  await loginPage.login(VALID_EMAIL, VALID_PASSWORD);
+  booksPage = new BookPage({page});
+  await expect(page).toHaveURL(booksPage.MY_BOOKS_URL);
+  await expect(booksPage.booksDropdown).toBeVisible();
 });
 
-test("navigating my books link redirect to it's page after login", async({page}: {page: Page}) => {
-    await navigationPage.navigateToMyBooks();    
-    const loginPage = await navigationPage.navigateToLogin();
-    loginPage.login(VALID_EMAIL, VALID_PASSWORD);
-    await expect(page).toHaveURL(MY_BOOKS_URL);
-    await expect(navigationPage.booksDropdown).toBeVisible();
-})
+test("my books link after login", async({page}: {page: Page}) => {
+  const loginPage = new LoginPage({page})
+  await loginPage.navigate();
+  await loginPage.login(VALID_EMAIL, VALID_PASSWORD);
+  const booksPage = await navigationPage.navigateToMyBooks() as BookPage;
+  await expect(page).toHaveURL(booksPage.MY_BOOKS_URL);
+  await expect(booksPage.booksDropdown).toBeVisible();
+});
 
 test("navigate to browse with dropdown", async({page}: {page: Page}) => {
     await navigationPage.navigateToBrowse();

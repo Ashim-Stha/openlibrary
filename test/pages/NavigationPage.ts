@@ -1,12 +1,11 @@
 import { Locator, Page } from "@playwright/test"
 import { LoginPage } from "./LoginPage";
+import { BookPage } from "./BookPage";
 
 export class NavigationPage {
     page : Page;
-    myBooksLink: Locator;
-    textToLogin: Locator;
     loginPage: LoginPage;
-    booksDropdown: Locator;
+    myBooksLink: Locator;
     browseLink: Locator;
     dropdownOnBrowse: Locator;
     optionOnBrowseDropdown: Locator;
@@ -14,21 +13,20 @@ export class NavigationPage {
     constructor({page}: {page: Page}) {
         this.page = page;
         this.myBooksLink = page.getByRole('link', {name: 'My Books'});
-        this.textToLogin = page.getByText('Log in to use your free Open Library card to borrow digital books from the nonprofit Internet Archive', {exact: true});
-        this.booksDropdown = page.locator('.disguised-select');
         this.browseLink = page.locator('#header-bar .browse-component details > summary');
         this.dropdownOnBrowse = page.locator('#header-bar .browse-dropdown-component .browse-dropdown-menu');
         this.optionOnBrowseDropdown = page.locator('#header-bar .browse-dropdown-component .browse-dropdown-menu li');
         }
 
-    async navigateToMyBooks() {
+    async navigateToMyBooks(): Promise<LoginPage | BookPage> {
+        const loginPage = new LoginPage({page: this.page});
         await this.myBooksLink.click();
-    }
-
-    async navigateToLogin(): Promise<LoginPage> {
-        const loginPage = new LoginPage({ page: this.page });
-        await loginPage.waitForLoad();
-        return loginPage;
+         const currentURL = this.page.url();
+            if (currentURL.includes(loginPage.LOGIN_URL)) {
+                return new LoginPage({page: this.page});
+            } else {
+                return new BookPage({page: this.page});
+            }
     }
 
     async navigateToBrowse() {

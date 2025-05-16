@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { LOGIN_URL } from "../helper-config";
 
 export class LoginPage {
   page: Page;
@@ -8,6 +9,7 @@ export class LoginPage {
   loginButton: Locator;
   errorMessage = "Please include an '@' in the email address.";
   logoutButton: Locator;
+  LOGIN_URL = LOGIN_URL;
 
   constructor({ page }: { page: Page }) {
     this.page = page;
