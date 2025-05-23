@@ -1,9 +1,8 @@
 import { test, expect, Page } from "@playwright/test";
 import { AdvancedSearchPage } from "../pages/AdvancedSearchPage";
-import { SearchResultsPage } from "../pages/SearchResultsPage";
 
 let advancedSearchPage: AdvancedSearchPage;
-const searchedBookName: string = 'Robinson';
+const searchedBookName: string = 'Robinson Crusoe';
 const searchedAuthorName: string = 'Daniel Defoe';
 
 test.beforeEach(async({page}: {page: Page}) => {
