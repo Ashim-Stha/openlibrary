@@ -31,8 +31,9 @@ export class AddBookPage {
       "Thank you for adding that book! Any more information you could provide would be wonderful!",
       { exact: true }
     );
-    this.addedLocator= page.getByText("Thank you very much for adding that new book!")
-
+    this.addedLocator = page.getByText(
+      "Thank you very much for adding that new book!"
+    );
   }
 
   async navigate() {
