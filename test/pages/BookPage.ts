@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test"
+import { Locator, Page } from "@playwright/test";
 import { BASE_URL } from "../helper-config";
 
 export class BookPage {

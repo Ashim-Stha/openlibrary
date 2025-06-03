@@ -9,9 +9,8 @@ test.beforeEach(async({ page }: {page: Page}) => {
     await openLibraryLogoPage.navigateToHome();
 });
 
-test("open-library logo is visible", async({page}: {page: Page}) => {
-    expect (openLibraryLogoPage.openLibraryLogo).toBeVisible;
-    expect (openLibraryLogoPage.openLibraryLogoAltText).toBeVisible;
+test("open-library logo is visible", async() => {
+    await expect(openLibraryLogoPage.openLibraryLogo).toBeVisible();
 });
 
 test("open-library logo click redirects to base URL", async({page}: {page: Page}) => {
@@ -19,9 +18,10 @@ test("open-library logo click redirects to base URL", async({page}: {page: Page}
     await expect(page).toHaveURL(BASE_URL);
 });
 
-test("tooltip appears on hovering over open-library logo", async({page}: {page: Page}) => {
+test("tooltip appears on hovering over open-library logo", async() => {
     await openLibraryLogoPage.hover();
-    expect (openLibraryLogoPage.openLibraryLogoTooltip).toBeVisible;
+    const titleAttr = await openLibraryLogoPage.openLibraryLogo.getAttribute('title');
+    expect(titleAttr).toBe("The Internet Archive's Open Library: One page for every book");
 });
 
 

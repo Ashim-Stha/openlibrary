@@ -10,7 +10,7 @@ export class AddBookPage {
   addButton: Locator;
   saveButton: Locator;
   moreInfoLocator: Locator;
-  addedLocator:Locator
+  addedLocator:Locator;
 
   constructor({ page }: { page: Page }) {
     this.page = page;

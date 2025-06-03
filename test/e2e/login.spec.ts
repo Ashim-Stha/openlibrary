@@ -1,4 +1,4 @@
-import { test, expect, Page } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { INVALID_EMAIL, VALID_EMAIL, VALID_PASSWORD, } from "../helper-config";
 
