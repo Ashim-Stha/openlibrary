@@ -11,7 +11,7 @@ test.beforeEach(async({page}: {page: Page}) => {
     await page.goto(BASE_URL);
 });
 
-test("navigate to my books page after login", async({page}: {page: Page}) => {
+test("navigate to my books page after login", async({page}: {page: Page})=>{
   const loginPage = await navigationPage.navigateToMyBooks() as LoginPage;
   await loginPage.login(VALID_EMAIL, VALID_PASSWORD);
   const booksPage = new BookPage({page});
