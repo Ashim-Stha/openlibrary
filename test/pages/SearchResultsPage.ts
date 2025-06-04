@@ -10,8 +10,8 @@ export class SearchResultsPage {
 
     constructor({page}: {page: Page}) {
         this.searchBooksHeading = page.locator('#test-body-mobile #contentHead h1');
-        this.bookNameLocator = page.locator('#searchResults .booktitle a');
-        this.authorNameLocator = page.locator('#searchResults .bookauthor a');
+        this.bookNameLocator = page.locator('.booktitle').getByRole('link', { name: 'Robinson Crusoe' });
+        this.authorNameLocator = page.locator('.bookauthor').getByRole('link', { name: 'Daniel Defoe' });
     }
 
     async navigateToSearchResults() {

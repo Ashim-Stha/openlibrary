@@ -6,3 +6,8 @@ export const INVALID_EMAIL: string = process.env.INVALID_EMAIL ?? "invalid";
 export const SIGNUP_URL: string = process.env.SIGNUP_URL ?? "";
 export const IMAGE_PATH: string =
   "./images/stars.png";
+export const TIMEOUTS = {
+  SHORT: 3000,
+  MEDIUM: 10000,
+  LONG: 20000
+};
