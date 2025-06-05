@@ -6,7 +6,7 @@ export class SearchResultsPage {
     searchBooksHeading: Locator;
     bookNameLocator: Locator;
     authorNameLocator: Locator;
-    static readonly SEARCH_RESULTS_URL: string = `${BASE_URL}/search?title=Robinson&author=Daniel+Defoe`
+    static readonly SEARCH_RESULTS_URL: string = `${BASE_URL}/search?title=Robinson&author=Daniel+Defoe`;
 
     constructor({page}: {page: Page}) {
         this.searchBooksHeading = page.locator('#test-body-mobile #contentHead h1');

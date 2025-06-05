@@ -9,17 +9,15 @@ export class OpenLibraryLogo {
 
     constructor({ page }: { page: Page }) {
         this.page = page;
-        this.openLibraryLogo = page.locator('#header-bar .logo-component a img');
-        this.openLibraryLogoAltText = page.getByAltText('open Library logo');
-        this.openLibraryLogoTooltip = page.getByText(`The Internet Archive's Open Library: One page for every book`, {exact: true});
+        this.openLibraryLogo = page.locator('.logo-component a');
     }
 
     async navigateToHome() {
-        await this.page.goto(BASE_URL);
+        await this.page.goto(BASE_URL, {waitUntil: 'networkidle'});
     }
 
     async click() {
-        await this.openLibraryLogo.click()
+        await this.openLibraryLogo.click();
     }
 
     async hover() {

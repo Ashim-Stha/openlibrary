@@ -10,7 +10,7 @@ test.beforeEach(async({page}: {page: Page}) => {
     await advancedSearchPage.navigateToAdvancedSearch();
 });
 
-test("advanced search heading is visible", async({page}: {page: Page}) => {
+test("advanced search heading is visible", async() => {
     await expect(advancedSearchPage.advancedSearchHeading).toBeVisible();
 });
 

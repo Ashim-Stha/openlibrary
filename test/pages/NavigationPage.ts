@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test"
+import { Locator, Page } from "@playwright/test";
 import { LoginPage } from "./LoginPage";
 import { BookPage } from "./BookPage";
 
@@ -19,7 +19,6 @@ export class NavigationPage {
         }
 
     async navigateToMyBooks(): Promise<LoginPage | BookPage> {
-        const loginPage = new LoginPage({page: this.page});
         await this.myBooksLink.click();
          const currentURL = this.page.url();
             if (currentURL.includes(LoginPage.LOGIN_URL)) {

@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { TIMEOUTS } from "../helper-config";
 
 export class BookReviewPopup {
     page: Page;
@@ -30,9 +31,13 @@ export class BookReviewPopup {
     }
 
     async selectReviewOptions() {
+        await this.reviewClarityTitleLocator.waitFor({ state: "visible", timeout: TIMEOUTS.MEDIUM });
         await this.reviewClarityTitleLocator.click();
+        await this.reviewClarityFeatureLocator.waitFor({ state: "visible", timeout: TIMEOUTS.MEDIUM });
         await this.reviewClarityFeatureLocator.click();
+        await this.reviewPaceTitleLocator.waitFor({ state: "visible", timeout: TIMEOUTS.MEDIUM });
         await this.reviewPaceTitleLocator.click();
+        await this.reviewPaceFeatureLocator.waitFor({ state: "visible", timeout: TIMEOUTS.MEDIUM });
         await this.reviewPaceFeatureLocator.click();
     }
 
@@ -42,7 +47,7 @@ export class BookReviewPopup {
 
     async getSelectedReviewsText(): Promise<string[]> {
         const selectedReviewsText = await this.selectedReviewsLocator.allInnerTexts();
-        const cleanedSelectedReviews = selectedReviewsText.map((text)=> text.replace(/×$/, '').trim()); 
+        const cleanedSelectedReviews = selectedReviewsText.map((text) => text.replace(/×$/, '').trim()); 
         return cleanedSelectedReviews;
     }
 

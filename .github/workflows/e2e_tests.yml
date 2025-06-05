@@ -27,6 +27,14 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./test/package-lock.json
 
+      - name: Install test dependencies
+        working-directory: ./test
+        run: npm install
+      
+      - name: Lint
+        working-directory: ./test
+        run: npx eslint --fix
+
       - name: Start the server
         run: docker compose up -d
 
@@ -39,7 +47,6 @@ jobs:
         working-directory: ./test
         id: test
         run: |
-          npm install
           npx playwright install chromium
           npx playwright test e2e --retries=0
 

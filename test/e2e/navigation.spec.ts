@@ -28,7 +28,7 @@ test("my books page after login", async({page}: {page: Page}) => {
   await expect(booksPage.booksDropdown).toBeVisible();
 });
 
-test("clicking browse opens the dropdown menu", async({page}: {page: Page}) => {
+test("clicking browse opens the dropdown menu", async() => {
     await navigationPage.navigateToBrowse();
     await expect(navigationPage.dropdownOnBrowse).toBeVisible();
     await expect(navigationPage.optionOnBrowseDropdown).toHaveText([

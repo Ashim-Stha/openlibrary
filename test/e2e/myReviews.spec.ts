@@ -18,7 +18,7 @@ test.beforeEach(async({page}: {page: Page}) => {
 test('adds and updates book review', async({page}) => {
     await test.step('Add review from Book Detail Page', async() => {
         const bookDetailURL = BookDetailPage.getBookDetailURl(bookID, slug);
-        await page.goto(bookDetailURL, {waitUntil: 'networkidle'})
+        await page.goto(bookDetailURL, {waitUntil: 'networkidle'});
         await expect(page).toHaveURL(bookDetailURL);
         const bookReviewPopup = await reviewPage.openBookReviewPopup('add');
         await expect(bookReviewPopup.bookReviewPopupLocator).toBeVisible();
