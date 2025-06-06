@@ -4,6 +4,7 @@ import { BASE_URL } from "../helper-config";
 export class LoginPage {
   page: Page;
   loginLinkLocator: Locator;
+  loginTextLinkLocator: Locator;
   emailFieldLocator: Locator;
   passwordFieldLocator: Locator;
   loginButton: Locator;
@@ -13,7 +14,8 @@ export class LoginPage {
 
   constructor({ page }: { page: Page }) {
     this.page = page;
-    this.loginLinkLocator = page.getByRole("link", { name: "Log In" });
+    this.loginLinkLocator = page.locator('.auth-component').getByRole('link', { name: 'Log In' });
+    this.loginTextLinkLocator = page.locator('#test-body-mobile  #contentBody a');
     this.emailFieldLocator = page.getByRole("textbox", { name: "Email" });
     this.passwordFieldLocator = page.getByText("Password", { exact: true });
     this.loginButton = page.getByRole("button", { name: "Log In" });
@@ -26,6 +28,10 @@ export class LoginPage {
 
   async navigate(): Promise<void> {
     await this.loginLinkLocator.click();
+  }
+
+  async navigateToLogin() {
+    await this.loginTextLinkLocator.click();
   }
 
   async login(email: string, password: string) {
